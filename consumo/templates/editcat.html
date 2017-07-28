@@ -1,0 +1,27 @@
+
+    {% extends "base.html" %}
+    
+    {% block body %}
+
+        <!-- Heading -->
+        
+
+        <!-- Feature Row -->
+        <div class="row">
+        	<p>
+        	<form class="form-signin" action="" method="post">{% csrf_token %}
+        		<h2 class="form-signin-heading">Editar categoria</h2>
+        		<input type="text" id="id_n" name="nome" class="form-control" placeholder="Nome da categoria" value="{{categ.nome}}" required>
+        		<button class="btn btn-lg btn-primary btn-block" type="submit" value="newcat">Salvar</button>
+        		
+        	</form>
+            </p>
+             
+            
+        </div>
+        <!-- /.row -->
+
+    {% endblock %}
+    <!-- /.container -->
+	
+	

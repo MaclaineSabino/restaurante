@@ -1,0 +1,45 @@
+
+    {% extends "base.html" %}
+    
+    {% block body %}
+
+        <!-- Heading -->
+        
+
+        <!-- Feature Row -->
+        <div class="row">
+        	<p>
+        	<form name="formm" class="form-signin" action="" method="post">{% csrf_token %}
+        		<h2 class="form-signin-heading">Editar Produto</h2>
+        		<select name="produto">
+        			{% for pro in prod %}
+        			   {% if pro.nome == tipoproduto.produto.nome %}
+        			<option value="{{pro.pk}}" selected>{{pro.nome}}</option>
+        			{% else %}
+        			<option value="{{pro.pk}}">{{pro.nome}}</option>
+        			{% endif %}
+        			{% endfor %}
+        		</select>
+        		<input type="text" id="id_nome_tp" name="nome" class="form-control" placeholder="Nome do produto" value="{{tipoproduto.nome}}" required>
+        		<input type="text" id="id_desc_tp" name="descricao" class="form-control" placeholder="Descrição do produto" value="{{tipoproduto.descricao}}" required>
+        		<input type="text" id="id_valor_tp" name="valor" class="form-control" placeholder="R$" value="{{tipoproduto.valor}}" required>
+        		<button id="botaoedittp" class="btn btn-lg btn-primary btn-block" onclick="converter('id_valor_tp')" type="submit" value="Salvar">Salvar</button>
+        		{% if form.errors %}
+        		<div class="alert alert-danger">
+        			{{form.non_field_errors}}
+        			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+        			
+        		</div>
+        		{% endif %}
+        		
+        	</form>
+            </p>
+             
+            
+        </div>
+        <!-- /.row -->
+
+    {% endblock %}
+    <!-- /.container -->
+	
+	

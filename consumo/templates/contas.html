@@ -1,0 +1,117 @@
+
+    {% extends "base.html" %}
+    
+    {% block body %}
+
+        <!-- Heading -->
+        <div class="panel panel-primary">
+            
+                <div  class="panel-heading titulo_conta">
+                	<div class="dropdown dropcontas">
+  					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+   					 <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+    				<span class="caret"></span>
+  					</button>
+  					<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+    				<li><a id="finalizarfatur" target="_blank" href="{% url 'finalizar' mesa_id=cont.mesa.pk %}">Finalizar faturamento</a></li>
+    				<li><a  href="{%url 'index' %}">Voltar</a></li>
+    				
+    				
+  					</ul>
+					</div>
+                    <strong>Faturamento da {{cont.mesa.nome}}</strong>
+                    
+               		 </div>
+                
+           
+        
+        <!-- /.row -->
+
+        <!-- Feature Row -->
+        <div class="row">
+        	
+            <article class="col-md-4 article-intro">
+            	
+                
+                	
+                    
+                    <span>Data: </span>{{cont.data}}<br>
+                    <span>valor consumo: </span>{{cont.valor_total}}<br>
+                    <span>Status da conta: </span>{{cont.status}}<br>
+                
+               
+                <h3>
+                    
+                </h3>
+              </article>
+          </div>
+          
+          
+          	<table  class="table table-striped" >
+          		<tr id="faturamento"><td>item(s)</td><td>Quant.</td><td>vl unitário</td><td>vl parcial</td><td><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></td>
+          			<td><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></td></tr>
+          	{% for it in item %}
+  					<tr><td>{{it.tipo_produto.nome}}</td><td>{{it.quantidade}}</td><td>R$ {{it.tipo_produto.valor}}</td><td>{{it.parcial}}</td><td><a href="{% url 'itemdecrescimo' mesa_id=it.conta.mesa.pk pk=it.pk tpk=it.tipo_produto.pk %}"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></a></td>
+  						<td><a href="{% url 'itemconta' mesa_id=it.conta.mesa.pk tpk=it.tipo_produto.pk %}"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></a></td></tr> 
+  			{% endfor %}
+  			<tr id="faturamento2"><td>TOTAL</td><td></td><td></td><td>R$ {{cont.valor_total}}</td><td></td><td></td></tr>
+  			</table>
+          
+              
+            
+          <!--    	
+        	<div class="panel panel-default">
+  <div class="panel-heading"><h4>categorias de produtos</h4></div>
+  <div class="panel-body">
+    <ul class="nav nav-pills">
+              		{% for cat in categorias %}
+  					<li role="presentation" class="active btnprodutos"><a href="{% url 'categorias' mesa_id=cont.mesa.pk pk=cat.pk %}">{{cat.nome}}</a></li>
+  					{% endfor %}
+  		
+				</ul>
+  </div>
+
+
+            
+        
+              
+            </div> -->
+            <div class="panel panel-default">
+  					<!-- Default panel contents -->
+ 				 <div id="titulosub" class="panel-heading">{{produto.nome}}</div>
+
+  				<!-- Table -->
+  				<table class="table table-hover">
+  					<tr><td><span class="titulos_tab">subtipos</span></td><td><span class="titulos_tab">preço</span></td><td><span class="titulos_tab">descrição</span></td><td><span class="titulos_tab">Adicionar</span></td></tr>
+  					{% for tprod in tp %}
+  					<tr>
+  						
+                	<td>{{tprod.nome}}</td><td>{{tprod.valor}}</td><td>{{tprod.descricao}}</td><td><a href="{% url 'itemconta' mesa_id=cont.mesa.pk tpk=tprod.pk %}">incluir</a></td>
+                
+                
+  					</tr>
+  					{% endfor %}
+    
+ 				 </table>
+			</div>
+             
+            	
+                {% block itemproduto %}
+                
+                {% endblock %}
+                	
+                    
+                    
+                
+               
+               
+              
+             
+            
+       
+        <!-- /.row -->
+</div>
+    {% endblock %}
+    <!-- /.container -->
+	
+	

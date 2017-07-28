@@ -1,0 +1,55 @@
+
+    {% extends "base.html" %}
+    
+    {% block body %}
+
+
+        <!-- Feature Row -->
+        <div class="panel panel-default">
+        	<div class="panel-heading"><div id="simbolomesas"><table id="tabelasimbolo"><tr><td><div class="celulacor" id="livre"></div></td><td>livre</td></tr><tr><td><div id="ocupada" class="celulacor"></div></td><td>ocupada</td></tr></table></div><h1>Mesas</h1></div>
+        <div class="row">
+        	{% for mesa in mesas %}
+            <article class="col-md-4 article-intro mesinhas">
+            	{% if mesa.status == 'ocupada' %}
+            	<div class="mesasr">
+                
+                	
+                    <h2 class="nome_mesa">{{mesa.nome}}</h2>
+                    <span>Status: </span>{{mesa.status}}
+                
+               
+                <h3>
+                	
+                    <a class="despesas" href="{% url 'conta' mesa.id %}" class="pull-right">Despesas</a>
+                    
+                </h3>
+                </div>
+                {% else %}
+                <div class="mesasa">
+                
+                	
+                    <h2 class="nome_mesa">{{mesa.nome}}</h2>
+                    <span>Status: </span>{{mesa.status}}
+                
+               
+                <h3>
+                	
+                    
+                  
+                    <a class="novaconta" href="{% url 'conta' mesa.id %}" class="pull-right">Abrir conta</a>
+                    
+                </h3>
+                </div>
+                {% endif %}
+              </article>
+             {% endfor %}
+            
+        </div>
+              <script type="text/javascript" > refreshPag(); </script>
+        </div>
+        <!-- /.row -->
+
+    {% endblock %}
+    <!-- /.container -->
+	
+	

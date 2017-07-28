@@ -1,0 +1,44 @@
+
+    {% extends "contas.html" %}
+    
+    {% block itemproduto %}
+
+        <!-- Heading -->
+        
+        <!-- /.row -->
+
+        <!-- Feature Row -->
+        
+        	<div class="panel panel-default">
+  <div class="panel-heading"><h4>Produtos</h4></div>
+  <div class="panel-body">
+    <ul class="nav nav-pills">
+              		{% for prod in produt %}
+  					<li id="mac" role="presentation" class="active"><a href="{% url 'tipoprodutos' mesa_id=cont.mesa.pk pk=prod.pk %}">{{prod.nome}}</a></li>
+  					{% endfor %}
+  		
+				</ul>
+  </div>
+</div>
+        	
+            
+             
+            
+        
+        
+        
+        	
+            
+            	
+                {% block itemtipoproduto %}
+                {% endblock %}
+              
+             
+            
+        
+        <!-- /.row -->
+
+    {% endblock %}
+    <!-- /.container -->
+	
+	

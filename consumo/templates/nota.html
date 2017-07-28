@@ -1,0 +1,82 @@
+
+{% load staticfiles %}
+<!DOCTYPE html>
+<!-- Template by Quackit.com -->
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Nota de despesas</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
+    <link href="{% static "css/custom.css" %}" rel="stylesheet">
+    <script src="{% static "js/jquery-3.1.0.js" %}"></script>
+    <script src="{% static "js/perc.js" %}"></script>
+    <script src="{% static "js/jspdf.min.js" %}"></script>
+    <script src="{% static "js/html2canvas.js" %}"></script>
+    
+    
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+  <div  class="container">
+  	<div id="gerapdf" class="notacompra">
+  		<p>
+  			<span class="estabelecimento">PIANO BAR & RESTAURANTE</span><br>
+  			<span class="endereço">RUA 13 DE MAIO , 168 - TERESINA - PI</span><br>
+  			<span class="cnpj">CNPJ:92.754.738/0013-04</span><br>
+  			<hr>
+  			<h5 class="titulomesa">{{mesa.nome}}- DESPESAS</h5>
+  			data: {{conta.data}}
+  			<table>
+  				<tr><td>ITEM</td><td>VL UNIT</td><td>QTD</td><td>VL PARC</td></tr>
+  				{% for itc in iconta %}
+  				<tr><td>{{itc.tipo_produto.nome}}</td><td>{{itc.tipo_produto.valor}}</td><td>{{itc.quantidade}}</td><td>{{itc.parcial}}</td></tr>
+  				{% endfor %}
+  				<hr>
+  				<tr><td>TOTAL</td><td></td><td></td><td>{{conta.valor_total}}</td></tr>
+  			</table><br><br>
+  			<p>volte sempre!!!</p>
+  			
+  		</p>
+  	</div>
+  </div>
+  <div class="container">
+  	<br><br><br><br>
+  	<div id="conteiner_botao"><button id="btnpdf">Salvar nota</button></div>
+  </div>
+
+
+
+	
+    <!-- jQuery -->
+    <script src="{% static "js/jquery-3.1.0.js" %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+	
+	<!-- IE10 viewport bug workaround -->
+	<script src="{% static "js/ie10-viewport-bug-workaround.js" %}"></script>
+	
+	<!-- Placeholder Images -->
+	<script src="{% static "js/holder.min.js" %}"></script>
+	
+	<script src="{% static "js/perc.js" %}"></script>
+</body>
+
+</html>

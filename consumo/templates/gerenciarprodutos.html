@@ -1,0 +1,134 @@
+
+    {% extends "base.html" %}
+    
+    {% block body %}
+
+        <!-- Heading -->
+        <div class="panel panel-primary">
+        	
+            <div  class="panel-heading titulo_conta">
+                <div  class="dropdown dropcontas">
+  					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+   					 <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+    				<span class="caret"></span>
+  					</button>
+  					<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+    				<li class="links_"><span class="btn_drop"><a href="{% url 'novacat' %}">adicionar</a></span></li>
+    				<li class="links_"><span class="btn_drop" id="linkedit"></span></li>
+    				<li class="links_"><span class="btn_drop" id="linkdelete"></span></li>
+    				
+    				
+  					</ul>
+  					</div>
+					
+                	<strong>Categorias</strong>
+                		                	
+                		
+             </div>
+             
+                			
+                	<form action="" method="post">{% csrf_token %}
+                
+                    <select name="categoria" id="categoria">
+                    	{% for cat in categorias %}
+                    	<option value="{{cat.pk}}">{{cat.nome}}</option>
+                    	{% endfor %}
+                    </select>
+                   </form>
+                   
+                    
+              </div>
+              
+              
+              
+              <div class="panel panel-primary">
+        	
+            <div  class="panel-heading titulo_conta">
+                <div  class="dropdown dropcontas">
+  					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+   					 <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+    				<span class="caret"></span>
+  					</button>
+  					<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+    				<li class="links_"><span class="btn_drop"><a href="{% url 'newprod' %}">adicionar</a></span></li>
+    				<li class="links_"><span class="btn_drop" id="editprod"></span></li>
+    				<li class="links_"><span class="btn_drop" id="proddelete"> </span></li>
+    				
+    				
+  					</ul>
+  					</div>
+					
+                	<strong>Produtos</strong>
+                	
+                		
+             </div>
+             
+                			
+                	<form action="" method="post">{% csrf_token %}
+                
+                    <select name="categoria" id="produto">
+                    	{% for prod in produtos %}
+                    	<option value="{{prod.pk}}">{{prod.nome}}</option>
+                    	{% endfor %}
+                    </select>
+                   </form>
+                   
+                    
+              </div>
+              
+              
+              <div class="panel panel-primary">
+        	
+            <div  class="panel-heading titulo_conta">
+                <div class="dropdown dropcontas">
+  					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+   					 <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+    				<span class="caret"></span>
+  					</button>
+  					<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+    				<li class="links_"><span class="btn_drop"><a href="{%url 'newtp' %}">adicionar</a></span></li>
+    				<li class="links_"><span class="btn_drop" id="tpedit"></span></li>
+    				<li class="links_"><span class="btn_drop" id="tpdelete"></span></li>
+    				
+    				
+  					</ul>
+  					</div>
+					
+                	<strong>Subtipos de produtos</strong>
+                	
+                		
+             </div>
+             
+                			
+                	<form action="" method="post">{% csrf_token %}
+                
+                    <select name="tipoproduto" id="tipoproduto">
+                    	{% for produ in tipo_produtos %}
+                    	<option value="{{produ.pk}}" >{{produ.nome}}</option>
+                    	{% endfor %}
+                    </select>
+                   </form>
+                   
+                    
+              </div>
+              
+              
+              
+                    
+                 
+                    	
+                    
+                    
+                
+                
+            
+            <script>
+            	valorSelect();
+            </script>
+        
+        
+
+    {% endblock %}
+    <!-- /.container -->
+	
+	

@@ -1,0 +1,41 @@
+
+    {% extends "base.html" %}
+    
+    {% block body %}
+
+        <!-- Heading -->
+        
+
+        <!-- Feature Row -->
+        <div class="row">
+        	<p>
+        	<form class="form-signin" action="" method="post">{% csrf_token %}
+        		<h2 class="form-signin-heading">Novo Produto</h2>
+        		<select name="categoria">
+        			{% for cat in catego %}
+        			<option value="{{cat.id}}">{{cat.nome}}</option>
+        			{% endfor %}
+        			
+        		</select>
+        		
+        		
+        		<input type="text" id="id_nome" name="nome" class="form-control" placeholder="Nome do Produto" required>
+        		<button class="btn btn-lg btn-primary btn-block" type="submit" value="Salvar">Cadastrar</button>
+        		{% if form.errors %}
+        		<div class="alert alert-danger">
+        			{{form.non_field_errors}}
+        			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+        			
+        		</div>
+        		{% endif %}
+        	</form>
+            </p>
+             
+            
+        </div>
+        <!-- /.row -->
+
+    {% endblock %}
+    <!-- /.container -->
+	
+	

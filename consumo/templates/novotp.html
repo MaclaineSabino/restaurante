@@ -1,0 +1,43 @@
+
+    {% extends "base.html" %}
+    
+    {% block body %}
+
+        <!-- Heading -->
+        
+
+        <!-- Feature Row -->
+        <div class="row">
+        	<p>
+        	<form class="form-signin" action="" method="post">{% csrf_token %}
+        		<h2 class="form-signin-heading">Novo Tipo Produto</h2>
+        		<select name="produto">
+        			{% for tip in tp %}
+        			<option value="{{tip.id}}">{{tip.nome}}</option>
+        			{% endfor %}
+        			
+        		</select>
+        		
+        		
+        		<input type="text" id="id_nome" name="nome" class="form-control" placeholder="Nome Tipo Produto" required>
+        		<input type="text" id="id_descricao" name="descricao" class="form-control" placeholder="descrição" required>
+        		<input type="text" id="id_valor_tp" name="valor" class="form-control" placeholder="R$" required>
+        		<button class="btn btn-lg btn-primary btn-block" onclick="converter('id_valor_tp')" type="submit" value="Salvar">Cadastrar</button>
+        		{% if form.errors %}
+        		<div class="alert alert-danger">
+        			{{form.non_field_errors}}
+        			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+        			
+        		</div>
+        		{% endif %}
+        	</form>
+            </p>
+             
+            
+        </div>
+        <!-- /.row -->
+
+    {% endblock %}
+    <!-- /.container -->
+	
+	

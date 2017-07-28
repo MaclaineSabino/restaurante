@@ -1,0 +1,248 @@
+body {
+	padding-top: 50px;
+	color: #959595;
+	}
+	
+h1, h2, h3, h4, h5, h6 {
+	color: black;
+	}
+	
+.feature {
+	background-color: yellowgreen;
+	color: greenyellow;
+	}
+	
+.article-intro {
+    margin-bottom: 25px;
+}
+
+.footer-blurb {
+    padding: 30px 0;
+    background-color: goldenrod;
+    color: black;
+}
+    
+.footer-blurb-item {
+    padding: 30px;
+    }
+ 
+.small-print {
+	background-color: #fff;
+	padding: 30px 0;
+}
+#background_painel{
+	background-color:#CECECE;
+	background-image:url("capa.png");
+	
+}
+#titulositeprincipal{
+	color:#FFE4C4;
+}
+#titulosite{
+	color:#FAEBD7;
+}
+#logo{
+	max-width:50px;
+	max-height:50px;
+	margin-top:-10px;
+}
+.mesas{
+	margin-top:10%;
+
+	background-color:#8470FF;
+	border: 10px solid;
+	height: 150px;
+	
+	margin-left:0px;
+	
+-webkit-box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
+-moz-box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
+box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
+}
+.mesasa{
+	margin-top:10%;
+	
+	
+	background-color:#8470FF;
+	border: 10px solid;
+	height: 150px;
+	
+	margin-left:0px;
+	
+-webkit-box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
+-moz-box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
+box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
+}
+.mesasr{
+	margin-top:10%;
+	
+	background-color:#FF4500;
+	border: 10px solid;
+	height: 150px;
+	
+	margin-left:0px;
+	
+-webkit-box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
+-moz-box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
+box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
+}
+.nome_mesa{
+	
+}
+.despesas{
+	color:#008B45;
+}
+#titulosub{
+	text-align:center;
+	font-weight: bolder;
+}
+.titulos_tab{
+	font-weight: bolder;
+	
+}
+#faturamento{
+	font-size:15px;
+	font-weight:bold;
+	background-color:#000000;
+	color:#FFFFFF;
+	
+}
+
+#faturamento2{
+	font-size:15px;
+	font-weight:bold;
+	background-color:#000000;
+	color:#FFFFFF;
+	
+}
+#opcoesmesa{
+	float:right;
+	
+}
+#opcoesmesa span{
+	font-size:xx-large;
+	padding-right:10px;
+}
+.titulo_conta{
+	
+	font-size:x-large;
+}
+.dropcontas{
+	float:right;
+}
+.dropcontas{
+	color:#2F4F4F;
+}
+#dropdownMenu1{
+	color:#2F4F4F;
+}
+
+
+.links_ a:link,hover{
+	text-decoration:none !important;
+	
+}
+.btn_drop{
+	padding:5%;
+}
+.btn_drop:hover{
+	color:#000080;
+}
+.links_:hover{
+	background-color:#D3D3D3;
+}
+.notacompra{
+	margin:0 auto;
+	border: 1px solid;
+	width:300px;
+}
+
+.notacompra td{
+	padding-right:5px;
+}
+#conteiner_botao{
+	margin:0 auto;
+	width:300px;
+	text-align:center;
+}
+#gerapdf{
+	background-color:#FFFFFF;
+
+}
+.titulomesa{
+	text-align:center;
+}
+.img-footer{
+	max-width: 100%;
+	max-height: 100%;
+}
+.active:hover{
+	cursor:pointer;
+}
+#painelprodutos{
+	font-size:40px;
+	font-weight:bolder;
+	text-align:center;
+	
+}
+.footer-blurb{
+	border: 5px solid;
+	background-color:#F0FFFF;
+	
+	
+	
+}
+.small-print .container{
+	text-align:center;
+}
+#simbolomesas{
+	float:right;
+}
+#tabelasimbolo .celulacor{
+	width:15px;
+	height:15px;
+	margin-right:10px;
+	
+}
+#tabelasimbolo #livre{
+
+	background-color:#8470FF;
+}
+#tabelasimbolo #ocupada{
+	background-color:#FF4500;
+}
+.btnnomes{
+	display:block;
+	font-size:14px;
+	margin-top:2px;
+	
+}
+.modalmesa{
+	border:1px solid;
+	padding:3px 3px 3px 3px;
+	border-radius:50%;
+	display: inline-block;
+background-color:black;
+width:50px;
+height:50px;
+}
+.modalmesa:hover{
+	background-color:blue;
+	font-weight:bolder;
+	width:70px;
+    height:70px;
+}
+.dentro{
+	font-size:10px;
+	margin-top:30%;
+	color:#FFFFFF;
+	text-align:center;
+}
+#mesaexplica{
+	font-weight:bolder;
+	color:#000000;
+}
+.clicado{
+	background-color:#2F4F4F;
+	color:black;
+}

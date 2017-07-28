@@ -1,0 +1,42 @@
+
+    {% extends "base.html" %}
+    
+    {% block body %}
+
+        <!-- Heading -->
+        
+
+        <!-- Feature Row -->
+        <div class="row">
+        	<p>
+        	<form class="form-signin" action="" method="post">{% csrf_token %}
+        		<h2 class="form-signin-heading">Editar Produto</h2>
+        		<select name="categoria">
+        			{% for cate in categ %}
+        			   {% if cate.nome == produto.categoria.nome %}
+        			<option value="{{cate.pk}}" selected>{{cate.nome}}</option>
+        			{% else %}
+        			<option value="{{cate.pk}}">{{cate.nome}}</option>
+        			{% endif %}
+        			{% endfor %}
+        		</select>
+        		<input type="text" id="id_nome_produto" name="nome" class="form-control" placeholder="Nome do produto" value="{{produto.nome}}" required>
+        		<button class="btn btn-lg btn-primary btn-block" type="submit" value="Salvar">Salvar</button>
+        		{% if form.errors %}
+        		<div class="alert alert-danger">
+        			{{form.non_field_errors}}
+        			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+        			
+        		</div>
+        		{% endif %}
+        	</form>
+            </p>
+             
+            
+        </div>
+        <!-- /.row -->
+
+    {% endblock %}
+    <!-- /.container -->
+	
+	
