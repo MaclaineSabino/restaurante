@@ -1,15 +1,80 @@
-from django.shortcuts import render,get_object_or_404,redirect,render_to_response
-from django.template import RequestContext
+from django.shortcuts import render,get_object_or_404,redirect
 from consumo.models import *
 from django.views.generic.base import View
 from consumo.forms import *
 from django.db.models.functions import Lower
 import json
+from django.contrib.auth.decorators import login_required
 from django.core.serializers.json import DjangoJSONEncoder
 import decimal
 # Create your views here.
 
+def ocorrencias(lista):
+
+    ocorrencias = {}
+    for n in lista:
+        if n in ocorrencias:
+            ocorrencias[n]=ocorrencias[n]+1
+
+        else:
+            ocorrencias[n]=1
+
+    return ocorrencias
+
+def maiores(dicionario):
+    lis=[]
+    count=0
+    while(count<3):
+
+        lis.append(max(dicionario,key=dicionario.get))
+        count=count+1
+        del dicionario[max(dicionario,key=dicionario.get)]
+
+
+    return lis
+
+def maispedidos(lista):
+    list=[]
+
+    for n in lista:
+        list.append(TipoProduto.objects.get(id=n))
+
+    return list
+
+
 def index(request):
+
+    return render(request,'login.html')
+
+
+
+@login_required
+def relatorios(request):
+
+    return render(request,'relatorios.html')
+
+class RegistrarUsuarioView(View):
+    template='registrar.html'
+    def get(self,request):
+
+        return render(request,self.template)
+
+    def post(self,request):
+        form = RegistrarUsuarioForm(request.POST)
+        if form.is_valid():
+            dados_form = form.cleaned_data
+            usuario = User.objects.create_user(first_name=dados_form['nome'],
+                                          username=dados_form['email'],
+                                          email = dados_form['email'],
+                                          password = dados_form['senha'])
+            usuario.save()
+            return redirect('index')
+        return render(request,self.template,{'form':form})
+
+@login_required
+def index2(request):
+    lista_id=[]
+    dicionar = {}
     categoria = Categoria.objects.all().order_by(Lower('nome')).values_list()
     catejson = json.dumps(list(categoria),cls=DjangoJSONEncoder)
 
@@ -19,16 +84,28 @@ def index(request):
     tipoproduto = TipoProduto.objects.all().order_by(Lower('nome')).values_list()
     tipoprodjson = json.dumps(list(tipoproduto),cls=DjangoJSONEncoder)
 
+    tipoprd =list(ItemConta.objects.all())
+
+    for id in tipoprd:
+        lista_id.append(id.tipo_produto_id)
+
+
+    dicionar=ocorrencias(lista_id)
+    produtos_mais_pedidos = maispedidos(maiores(dicionar))
+
+
+
     return render(request,'index.html',{
 
 
         'mesas':Mesa.objects.all(),
         'categ':catejson,
         'produ':produtjson,
-        'tipoprod':tipoprodjson
+        'tipoprod':tipoprodjson,
+        'tpopro':produtos_mais_pedidos
     })
 
-
+@login_required
 def abrirConta(request,mesa_id):
     mesa = Mesa.objects.get(id=mesa_id)
     conta=mesa.Conta()
@@ -58,7 +135,7 @@ def abrirConta(request,mesa_id):
         'tipoprod':tipoprodjson
     })
 
-
+@login_required
 def gerenciarProduto(request):
 
 
@@ -75,6 +152,10 @@ class RegistrarCategoriaView(View):
     template='newcat.html'
 
     def get(self,request):
+
+        if not request.user.is_authenticated:
+            return render(request,'login.html')
+
         return render(request,self.template)
 
     def post(self,request):
@@ -91,6 +172,9 @@ class RegistrarProdutoView(View):
 
 
     def get(self,request):
+
+        if not request.user.is_authenticated:
+            return render(request,'login.html')
         catego = Categoria.objects.all()
         return render(request,self.template,{'catego':catego})
 
@@ -115,6 +199,8 @@ class RegistrarTipoProdutoView(View):
 
 
     def get(self,request):
+        if not request.user.is_authenticated:
+            return render(request,'login.html')
         tp = Produto.objects.all()
         return render(request,self.template,{'tp':tp})
 
@@ -135,7 +221,7 @@ class RegistrarTipoProdutoView(View):
             return redirect('gerenciarprodutos')
         return render(request,self.template,{'form':form,
                                              'tp':tp})
-
+@login_required
 def EditarCategoria(request,pk):
     template = 'editcat.html'
     categ = get_object_or_404(Categoria,pk=pk)
@@ -153,7 +239,7 @@ def EditarCategoria(request,pk):
 
     return render(request,template ,{'form':form,
                                            'categ':categ})
-
+@login_required
 def DeletarCategoria(request,pk):
     categ = Categoria.objects.get(id=pk)
     categ.delete()
@@ -165,6 +251,8 @@ class EditarProdutoView(View):
     catego = Categoria.objects.all()
 
     def get(self,request,pk):
+        if not request.user.is_authenticated:
+            return render(request,'login.html')
         produto = get_object_or_404(Produto,pk=pk)
         catego = Categoria.objects.all()
         return render(request,self.template,{'categ':catego,
@@ -189,7 +277,7 @@ class EditarProdutoView(View):
         return render(request,self.template,{'form':form,
                                              'categ':catego,
                                              'produto':produto})
-
+@login_required
 def DeletarProduto(request,pk):
 
 
@@ -203,6 +291,8 @@ class EditarTpView(View):
     template = 'edittp.html'
 
     def get(self,request,pk):
+        if not request.user.is_authenticated:
+            return render(request,'login.html')
         prod = Produto.objects.all()
         tipoproduto = TipoProduto.objects.get(id=pk)
         return render(request,self.template,{'prod':prod,
@@ -229,13 +319,13 @@ class EditarTpView(View):
         return render(request,self.template,{'form':form,
                                              'pro':prod,
                                              'tipoproduto':tipoproduto})
-
+@login_required
 def DeletarTp(request,pk):
     tp = TipoProduto.objects.get(id=pk)
     tp.delete()
     return redirect('gerenciarprodutos')
 
-
+@login_required
 def Categorias(request,mesa_id,pk):
     template='itemproduto.html'
 
@@ -249,7 +339,7 @@ def Categorias(request,mesa_id,pk):
                                     'cont':conta,
                                     'categorias':Categoria.objects.all(),
                                     'item':itemconta})
-
+@login_required
 def TipoProdutos(request,mesa_id,pk):
     template = 'itemtipoproduto.html'
     mesa = Mesa.objects.get(id=mesa_id)
@@ -267,7 +357,7 @@ def TipoProdutos(request,mesa_id,pk):
                                     'categorias':Categoria.objects.all(),
                                     'item':itemconta})
 
-
+@login_required
 def ItemContaDespesa(request,mesa_id,tpk):
 
     mesa = Mesa.objects.get(id=mesa_id)
@@ -281,7 +371,7 @@ def ItemContaDespesa(request,mesa_id,tpk):
     item_conta.save()
     item_conta.despesaConta()
     return redirect('conta',mesa_id)
-
+@login_required
 def ItemContaDecrescimo(request,mesa_id,pk,tpk):
     mesa = Mesa.objects.get(id=mesa_id)
     conta=mesa.Conta()
@@ -297,11 +387,11 @@ def ItemContaDecrescimo(request,mesa_id,pk,tpk):
         ic.delete()
         conta.desocuparMesa()
     return redirect('conta',mesa_id)
-
+@login_required
 def gerenciarMesa(request):
     return render(request,'gerenciarmesas.html',{
         'mesas':Mesa.objects.all()})
-
+@login_required
 def acrescentarMesa(request):
     qtd = Mesa.objects.all()
     valor = len(qtd)+1
@@ -310,7 +400,7 @@ def acrescentarMesa(request):
     mesa = Mesa(nome=texto)
     mesa.save()
     return redirect('gerenciarmesas')
-
+@login_required
 def removerMesa(request):
     qtd = Mesa.objects.all()
     qtd[len(qtd)-1].delete()
@@ -318,7 +408,7 @@ def removerMesa(request):
     return redirect('gerenciarmesas')
 
 
-
+@login_required
 def finalizarConta(request,mesa_id):
     template='nota.html'
     mesa = Mesa.objects.get(id=mesa_id)
@@ -332,7 +422,7 @@ def finalizarConta(request,mesa_id):
         'mesa':mesa
              })
     return redirect('index')
-
+@login_required
 def acrescentarTpMesa(request,mesa_id,pk):
     mesa = Mesa.objects.get(id=mesa_id)
     conta=mesa.Conta()

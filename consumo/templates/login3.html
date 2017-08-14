@@ -1,0 +1,92 @@
+
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<!-- Template by Quackit.com -->
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Sistema de controle - Bar & Restaurante</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
+    <link href="{% static "css/custom.css" %}" rel="stylesheet">
+    <script src="{% static "js/jquery-3.1.0.js" %}"></script>
+    <script src="{% static "js/perc.js" %}"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="body_login">
+	<div class="painel"><span><img id="logo3" src="{% static "img/logo4.png" %}"</span><span class="titulo_login">Control system for Bars and restaurants</span></div>
+	<div class="container">
+		<div class="container_form">
+	<form class="form_n" action="{% url 'login' %}" method="post">
+		{% csrf_token %}
+  <div class="form-group">
+    <label for="exampleInputEmail1">Endereço de e-mail</label>
+    
+    <input type="text" name="username" class="form-control" id="id_email" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Senha</label>
+    <input type="password" name="password" class="form-control" id="id_senha" placeholder="Password">
+  </div>
+  
+  <button type="submit" class="btn btn-default" value="Login">Login</button>
+  <a class="new_user" href="{%url 'registrar' %}">Novo usuário</a>
+  
+  {% if form.errors %}
+  <div class="alert alert-danger">
+  	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+  	Usuário ou senha incorretos
+  </div>
+  {% endif %}
+</form>
+</div>
+	</div>
+	
+	
+    <!-- jQuery -->
+    <script src="{% static "js/jquery-3.1.0.js" %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+	
+	<!-- IE10 viewport bug workaround -->
+	<script src="{% static "js/ie10-viewport-bug-workaround.js" %}"></script>
+	
+	<!-- Placeholder Images -->
+	<script src="{% static "js/holder.min.js" %}"></script>
+	
+	<script src="{% static "js/perc.js" %}"></script>
+	
+	
+	<script type="text/javascript">
+var liscat = unescape("{{categ|safe|escapejs}}");
+var listtipop = unescape("{{tipoprod|safe|escapejs}}")
+var listprod = unescape("{{produ|safe|escapejs}}");
+categorialis=JSON.parse(liscat);
+ prodlista= JSON.parse(listprod);
+ tipoprodulis=JSON.parse(listtipop);
+
+    var lista = categorialis.length;
+	
+	listaCategorias(categorialis);
+	
+	</script>
+</body>
+
+</html>

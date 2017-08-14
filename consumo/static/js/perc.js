@@ -220,7 +220,47 @@ function adicionarClasse(){
 }
 
 
+function randOrd() {
+
+return (Math.round(Math.random())-0.5);
+
+}
+
+
+
+function selecionarMesa(){
+	
+	$('#btn_sorteio').click(function(e){
+		$(".sorteada").empty();
+		$(".mesasr").css("background-color","#FF4500");
+		$(".mesasr").css("border","10px solid");
+		
+
+	var mesas = $(".mesasr");
+	
+	for(i=0; i<mesas.length; i++){
+		mesas.eq(i).animate(
+			{opacity:0.3}
+			,1000);
+			
+			mesas.eq(i).animate(
+			{opacity:1.0}
+			,1500);
+		
+		//mesas.eq(i).removeClass('escolha').slow();
+	}
+	mesas.sort(randOrd);
+	mesas.eq(4).css("background-color","white").append('<span class="sorteada">sorteada</span>');
+	mesas.eq(4).css("border","10px solid #000080");
+	
+	
+});
+}
+
+
 $(document).ready(function(e){
+
+	
 	
 $(".active").click(function(e){
 		

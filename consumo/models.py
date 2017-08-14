@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User, Group
 from django.db import models
 import datetime
 import decimal
@@ -6,6 +7,7 @@ import decimal
 # Create your models here.
 
 class Mesa(models.Model):
+    
     nome = models.CharField(max_length=50)
     status=models.CharField(max_length=10,default="livre")
 

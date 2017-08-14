@@ -14,16 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
+
 from consumo import views
 
+
 urlpatterns = [
-    url(r'^$',views.index,name='index'),
+    url(r'^$',views.index,name='ind'),
+    url(r'^1/$',views.index2,name='index'),
+    url(r'^novo/$',views.RegistrarUsuarioView.as_view(),name='registrar'),
     url(r'^mesa/(?P<mesa_id>\d+)$',views.abrirConta,name='conta'),
     url(r'^gerenciarprodutos/$',views.gerenciarProduto, name='gerenciarprodutos'),
     url(r'^gerenciarmesas/$',views.gerenciarMesa, name='gerenciarmesas'),
     url(r'^gerenciarmesas/ad/$',views.acrescentarMesa, name='acrescentarmesa'),
     url(r'^gerenciarmesas/re/$',views.removerMesa, name='removermesa'),
-
     url(r'^novacategoria/$',views.RegistrarCategoriaView.as_view(),name='novacat'),
     url(r'^gerenciarprodutos/editarcategoria/(?P<pk>\d+)$',views.EditarCategoria,name='editcat'),
     url(r'^gerenciarprodutos/deletarcategoria/(?P<pk>\d+)$',views.DeletarCategoria, name='deletecat'),
@@ -38,7 +41,10 @@ urlpatterns = [
     url(r'^mesa/(?P<mesa_id>\d+)/categorias/tipoproduto/itemconta/(?P<tpk>\d+)$',views.ItemContaDespesa, name='itemconta'),
     url(r'^mesa/(?P<mesa_id>\d+)/categorias/tipoproduto/(?P<pk>\d+)/itemconta/d/(?P<tpk>\d+)$',views.ItemContaDecrescimo, name='itemdecrescimo'),
     url(r'^mesa/(?P<mesa_id>\d+)/f/$',views.finalizarConta, name='finalizar'),
-    url(r'^mesa/(?P<mesa_id>\d+)/tipoproduto/(?P<pk>\d+)$',views.acrescentarTpMesa,name='acresctpmesa')
+    url(r'^mesa/(?P<mesa_id>\d+)/tipoproduto/(?P<pk>\d+)$',views.acrescentarTpMesa,name='acresctpmesa'),
+    url(r'^relatorios/$',views.relatorios,name='relatorio'),
+    
+
 
 
 

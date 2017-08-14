@@ -1,6 +1,30 @@
 from django import forms
 from consumo.models import *
+from django.contrib.auth.models import User
 
+class RegistrarUsuarioForm(forms.Form):
+    email = forms.CharField(required=True)
+    nome = forms.CharField(required=True)
+    senha = forms.CharField(required=True)
+
+    def is_valid(self):
+        valida = True
+        if not super(RegistrarUsuarioForm,self).is_valid():
+            self.informa_erro('todos os campos devem está preenchidos')
+            valida=False
+
+        user_exists = User.objects.filter(username=self.cleaned_data['email']).exists()
+        if(user_exists):
+            self.informa_erro('esse email já está cadastrado')
+            valida=False
+
+        return valida
+
+    def informa_erro(self,message):
+
+        errors=self._errors.setdefault(forms.forms.NON_FIELD_ERRORS,forms.utils.ErrorList())
+
+        errors.append(message)
 
 class RegistrarCategoriaForm(forms.Form):
     nome = forms.CharField()

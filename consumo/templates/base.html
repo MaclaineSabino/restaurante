@@ -90,6 +90,7 @@
 							<li><a href="{% url 'index' %}">Home</a></li>
 							<li><a href="{% url 'gerenciarprodutos' %}">Gerenciar Produtos</a></li>
 							<li><a href="{% url 'gerenciarmesas' %}">Gerenciar Mesas</a></li>
+							<li><a href="{% url 'relatorio' %}" target="_blank">Relatórios</a></li>
 							
 						</ul>
 					</li>
@@ -118,7 +119,28 @@
 	</div>
 
     <!-- Content -->
+    <div class="container" id="primeirocontainer">
+    	<div class="panel panel-success">
+    		<div class="panel-heading mais">os mais pedidos</div>
+    		<div class="row">
+    			
+    			<article class="col-md-4 article-intro maispedidos">
+    				{% for numero in tpopro %}
+    				<div class="pedidos"><button type="button" class="btn btn-primary btn-lg btnnomes maisped" data-toggle="modal" data-target="#myModal">{{numero}}</button></div>
+    				
+    				{% endfor %}
+    				<script type="text/javascript">getNomeTp()</script>
+    				
+    			
+    			
+    			</article>
+    		</div>
+    		
+    		
+    		</div>
+    </div>
     <div class="container">
+    	
 
         
         {% block body %}

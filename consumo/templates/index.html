@@ -6,7 +6,8 @@
 
         <!-- Feature Row -->
         <div class="panel panel-default">
-        	<div class="panel-heading"><div id="simbolomesas"><table id="tabelasimbolo"><tr><td><div class="celulacor" id="livre"></div></td><td>livre</td></tr><tr><td><div id="ocupada" class="celulacor"></div></td><td>ocupada</td></tr></table></div><h1>Mesas</h1></div>
+        	<div class="panel-heading"><div id="simbolomesas"><table id="tabelasimbolo"><tr><td><div class="celulacor" id="livre"></div></td><td>livre</td></tr><tr><td><div id="ocupada" class="celulacor"></div></td>
+        		<td>ocupada</td></tr></table></div><h1>Mesas</h1><button id="btn_sorteio">sorteio de brinde</button></div>
         <div class="row">
         	{% for mesa in mesas %}
             <article class="col-md-4 article-intro mesinhas">
@@ -15,7 +16,8 @@
                 
                 	
                     <h2 class="nome_mesa">{{mesa.nome}}</h2>
-                    <span>Status: </span>{{mesa.status}}
+                    <span class="st">Status: {{mesa.status}}</span>
+                    <span class="sorteio"> </span>
                 
                
                 <h3>
@@ -29,7 +31,7 @@
                 
                 	
                     <h2 class="nome_mesa">{{mesa.nome}}</h2>
-                    <span>Status: </span>{{mesa.status}}
+                    <span class="st">Status: {{mesa.status}}</span>
                 
                
                 <h3>
@@ -46,6 +48,7 @@
             
         </div>
               <script type="text/javascript" > refreshPag(); </script>
+              <script type="text/javascript">selecionarMesa();</script>
         </div>
         <!-- /.row -->
 

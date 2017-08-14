@@ -61,7 +61,7 @@ box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
 }
 .mesasa{
 	margin-top:10%;
-	
+	padding:3px 3px 3px 3px;
 	
 	background-color:#8470FF;
 	border: 10px solid;
@@ -72,10 +72,13 @@ box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
 -webkit-box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
 -moz-box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
 box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
+-webkit-border-radius: 15px;
+-moz-border-radius: 15px;
+border-radius: 15px;
 }
 .mesasr{
 	margin-top:10%;
-	
+	padding:3px 3px 3px 3px;
 	background-color:#FF4500;
 	border: 10px solid;
 	height: 150px;
@@ -85,6 +88,9 @@ box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
 -webkit-box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
 -moz-box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
 box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.18);
+-webkit-border-radius: 15px;
+-moz-border-radius: 15px;
+border-radius: 15px;
 }
 .nome_mesa{
 	
@@ -245,4 +251,62 @@ height:50px;
 .clicado{
 	background-color:#2F4F4F;
 	color:black;
+}
+.container_form{
+	border:5px solid;
+	padding:10px 10px 10px 10px;
+	width:300px;
+	margin:0 auto;
+	background:#ffffff;
+	-webkit-box-shadow: 0px 4px 79px 6px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 4px 79px 6px rgba(0,0,0,0.75);
+box-shadow: 0px 4px 79px 6px rgba(0,0,0,0.75);
+	
+	
+}
+.new_user{
+	float:right;
+}
+.painel{
+	width:100%;
+	height:100px;
+	background-color:#CECECE;
+}
+.titulo_login{
+	font-size:x-large;
+}
+#logo3{
+max-width:120px;
+max-height:120px;
+margin-top:-20px;
+}
+.fundo{
+	background-image:url('/../static/img/fundo.png');
+}
+#btn_new{
+	text-align:center;
+}
+.texto_inicio{
+	font-family:"Lora",serif;
+	color:rgb(69,70,70);
+	font-weight:400;
+	font-size:18.4px;
+	line-height:30px;
+}
+.nome_mesa{
+	text-align:center;
+}
+.mais{
+	font-weight:bolder;
+	font-size:16px;
+	text-align:center;
+}
+.st{
+	color:#000000;
+}
+.escolha{
+	background-color:white;
+}
+.sorteada{
+	
 }
