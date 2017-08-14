@@ -271,7 +271,7 @@ $(".active").click(function(e){
 	    
  $('#finalizarfatur').click(function(e){
 			
-	window.location.href = "../";
+	window.location.href = "../1";
 	//var a = window.location.replace("../");
 	  
    // $('#btn_inicio').trigger('click');
