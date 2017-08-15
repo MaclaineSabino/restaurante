@@ -38,7 +38,7 @@ class RegistrarUsuarioView(View):
                                           email = dados_form['email'],
                                           password = dados_form['senha'])
             usuario.save()
-            return redirect('index')
+            return redirect('ind')
         return render(request,self.template,{'form':form})
 
 @login_required

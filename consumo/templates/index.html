@@ -8,7 +8,12 @@
         <div class="panel panel-default">
         	<div class="panel-heading"><div id="simbolomesas"><table id="tabelasimbolo"><tr><td><div class="celulacor" id="livre"></div></td><td>livre</td></tr><tr><td><div id="ocupada" class="celulacor"></div></td>
         		<td>ocupada</td></tr></table></div><h1>Mesas</h1><button id="btn_sorteio">sorteio de brinde</button></div>
+        		{% if mesas|length == 0 %}
+        	<div class="conteiner_icone"><a href="{% url 'gerenciarmesas' %}"><span class="glyphicon glyphicon-plus-sign icon_inicio" aria-hidden="true"></span></a><br><span class="icon_texto">adicione mesas</span></div>
+        	{% endif %}
         <div class="row">
+        	
+        	
         	{% for mesa in mesas %}
             <article class="col-md-4 article-intro mesinhas">
             	{% if mesa.status == 'ocupada' %}

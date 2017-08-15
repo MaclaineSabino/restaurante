@@ -307,6 +307,18 @@ margin-top:-20px;
 .escolha{
 	background-color:white;
 }
-.sorteada{
+.icon_inicio{
+	font-size:200px;
+	color:#0000FF;
+
+}
+
+.conteiner_icone{
+	text-align:center;
 	
 }
+.icon_texto{
+	color:#0000FF;
+}	
+	
+	
