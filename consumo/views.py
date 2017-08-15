@@ -9,37 +9,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 import decimal
 # Create your views here.
 
-def ocorrencias(lista):
 
-    ocorrencias = {}
-    for n in lista:
-        if n in ocorrencias:
-            ocorrencias[n]=ocorrencias[n]+1
-
-        else:
-            ocorrencias[n]=1
-
-    return ocorrencias
-
-def maiores(dicionario):
-    lis=[]
-    count=0
-    while(count<3):
-
-        lis.append(max(dicionario,key=dicionario.get))
-        count=count+1
-        del dicionario[max(dicionario,key=dicionario.get)]
-
-
-    return lis
-
-def maispedidos(lista):
-    list=[]
-
-    for n in lista:
-        list.append(TipoProduto.objects.get(id=n))
-
-    return list
 
 
 def index(request):
@@ -74,6 +44,7 @@ class RegistrarUsuarioView(View):
 @login_required
 def index2(request):
     lista_id=[]
+    produtos_mais_pedidos = []
     dicionar = {}
     categoria = Categoria.objects.all().order_by(Lower('nome')).values_list()
     catejson = json.dumps(list(categoria),cls=DjangoJSONEncoder)
@@ -84,21 +55,27 @@ def index2(request):
     tipoproduto = TipoProduto.objects.all().order_by(Lower('nome')).values_list()
     tipoprodjson = json.dumps(list(tipoproduto),cls=DjangoJSONEncoder)
 
-    tipoprd =list(ItemConta.objects.all())
+    tipoprd =ItemConta.objects.all()
+    if len(tipoprd)>1:
+        count=0
+        lista = tipoprd[0].maispedidos()
+        for id in lista:
+            lista_id.append(lista[count][1])
+            count = count+1
 
-    for id in tipoprd:
-        lista_id.append(id.tipo_produto_id)
+    for v in lista_id:
+        tp = TipoProduto.objects.get(pk=v)
+        produtos_mais_pedidos.append(tp.nome)
 
 
-    dicionar=ocorrencias(lista_id)
-    produtos_mais_pedidos = maispedidos(maiores(dicionar))
+
 
 
 
     return render(request,'index.html',{
 
 
-        'mesas':Mesa.objects.all(),
+        'mesas':Mesa.objects.filter(usuario=request.user),
         'categ':catejson,
         'produ':produtjson,
         'tipoprod':tipoprodjson,
@@ -390,19 +367,20 @@ def ItemContaDecrescimo(request,mesa_id,pk,tpk):
 @login_required
 def gerenciarMesa(request):
     return render(request,'gerenciarmesas.html',{
-        'mesas':Mesa.objects.all()})
+        'mesas':Mesa.objects.filter(usuario=request.user)})
 @login_required
 def acrescentarMesa(request):
-    qtd = Mesa.objects.all()
+    user = request.user
+    qtd = Mesa.objects.filter(usuario=request.user)
     valor = len(qtd)+1
     texto = 'mesa0'+str(valor)
 
-    mesa = Mesa(nome=texto)
+    mesa = Mesa(nome=texto,usuario=user)
     mesa.save()
     return redirect('gerenciarmesas')
 @login_required
 def removerMesa(request):
-    qtd = Mesa.objects.all()
+    qtd = Mesa.objects.filter(usuario=request.user)
     qtd[len(qtd)-1].delete()
 
     return redirect('gerenciarmesas')

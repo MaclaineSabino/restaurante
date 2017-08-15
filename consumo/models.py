@@ -7,7 +7,7 @@ import decimal
 # Create your models here.
 
 class Mesa(models.Model):
-    
+    usuario = models.ForeignKey(User,on_delete=models.CASCADE)
     nome = models.CharField(max_length=50)
     status=models.CharField(max_length=10,default="livre")
 
@@ -92,6 +92,17 @@ class ItemConta(models.Model):
 
         self.conta.valor_total = decimal.Decimal(self.conta.valor_total)+montanteproduto
         self.conta.save()
+
+    def maispedidos(self):
+        from django.db import connection,transaction
+        cursor = connection.cursor()
+
+        cursor.execute("SELECT  COUNT(*),tipo_produto_id From consumo_itemconta GROUP BY tipo_produto_id ORDER BY COUNT(*) DESC LIMIT 3")
+
+        row = cursor.fetchall()
+        return row
+
+
 
 
 
